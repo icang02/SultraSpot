@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-body">
             <div class="app-brand justify-content-center">
-              <Link :href="route('home')" class="app-brand-link gap-2">
+              <a :href="route('home')" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <svg
                     width="25"
@@ -94,7 +94,7 @@
                 <span class="app-brand-text demo text-body fw-bolder"
                   >SultraSpot</span
                 >
-              </Link>
+              </a>
             </div>
             <!-- /Logo -->
             <h4 class="mb-2">Adventure starts here 🚀</h4>
@@ -111,7 +111,6 @@
                   id="name"
                   name="name"
                   placeholder="Enter your name"
-                  autofocus
                 />
                 <div class="invalid-feedback">{{ errors.name }}</div>
               </div>

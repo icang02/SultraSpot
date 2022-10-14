@@ -144,7 +144,15 @@
 
       <!-- Tables -->
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Transaksi</span>
+        <span
+          class="menu-header-text"
+          :class="{
+            'text-primary':
+              $page.url.startsWith('/order') ||
+              $page.url.startsWith('/checkout'),
+          }"
+          >Transaksi</span
+        >
       </li>
       <li class="menu-item" :class="{ active: $page.url.startsWith('/carts') }">
         <Link :href="route('carts')" class="menu-link">

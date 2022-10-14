@@ -9,7 +9,7 @@
           <div class="card-body">
             <!-- Logo -->
             <div class="app-brand justify-content-center">
-              <Link :href="route('home')" class="app-brand-link gap-2">
+              <a :href="route('home')" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <svg
                     width="25"
@@ -95,7 +95,7 @@
                 <span class="app-brand-text demo text-body fw-bolder"
                   >SultraSpot</span
                 >
-              </Link>
+              </a>
             </div>
             <!-- /Logo -->
 
@@ -145,7 +145,6 @@
                   id="email"
                   name="email"
                   placeholder="Enter your email"
-                  autofocus
                 />
                 <div v-if="errors.email" class="invalid-feedback">
                   {{ errors.email }}

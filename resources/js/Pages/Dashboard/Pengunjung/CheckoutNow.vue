@@ -65,11 +65,6 @@
                         Lihat Semua Wisata
                       </Link>
                     </td>
-                    <td class="text-start">Harga Tiket</td>
-                    <td class="text-end">Rp {{ place.price }}</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"></td>
                     <td class="fw-bold">Diskon</td>
                     <td class="text-end fw-bold">-</td>
                   </tr>

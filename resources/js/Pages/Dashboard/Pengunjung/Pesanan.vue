@@ -27,7 +27,7 @@
                   <i class="fab fa-angular fa-lg text-danger me-3"></i>
                   <strong>{{ order.no_order }}</strong>
                 </td>
-                <td>{{ order.tour_place_id }}</td>
+                <td>{{ order.tour_place.name }}</td>
                 <td>{{ order.total_payment }}</td>
                 <td>
                   <span

@@ -66,11 +66,6 @@
                         Lihat Semua Wisata
                       </Link>
                     </td>
-                    <td class="text-start">Harga Tiket</td>
-                    <td class="text-end">Rp {{ item.tour_place.price }}</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"></td>
                     <td class="fw-bold">Diskon</td>
                     <td class="text-end fw-bold">-</td>
                   </tr>
@@ -156,6 +151,7 @@ export default {
         confirmButtonText: "Lanjut",
       }).then((result) => {
         if (result.isConfirmed) {
+          Swal.fire("Sukses!", `Checkout berhasil.`, "success");
           Inertia.get(route("order.success", this.item.id));
         }
       });

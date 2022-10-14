@@ -7,7 +7,7 @@
         Wisata
       </h4>
 
-      <div class="row px-md-4 px-0">
+      <div class="row px-md-4 px-1">
         <div class="col-md-7 mb-md-0 mb-4">
           <div class="card">
             <h5 class="card-header">{{ wisata.name }}</h5>
@@ -205,7 +205,7 @@ export default {
         return this.toast("error", "Jumlah tiket melebihi stok.");
       }
 
-      Inertia.post(route("order", id_place), data);
+      Inertia.get(route("order", id_place), data);
     },
 
     toast(color, msg) {

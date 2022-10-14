@@ -12,7 +12,7 @@ class UserOrderController extends Controller
     public function index()
     {
         return Inertia::render('Dashboard/Pengunjung/Pesanan', [
-            'orders' => UserOrder::where('user_id', auth()->user()->id)->get(),
+            'orders' => UserOrder::with('tour_place')->where('user_id', auth()->user()->id)->get(),
         ]);
     }
 

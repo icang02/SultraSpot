@@ -7,6 +7,10 @@ import './MyJs/menu';
 import './MyJs/apexcharts';
 import './MyJs/perfect-scrollbar';
 
+// Rhea Script JS
+// import './MyJs/Homepage/plyr.polyfilled.min.js';
+// import './MyJs/Homepage/plyr';
+
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';

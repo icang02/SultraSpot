@@ -56,7 +56,7 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(CheckoutController::class)->group(function () {
     Route::get('checkout/{id_cart}', 'index')->middleware('auth')->can('pengunjung')->name('checkout');
     Route::get('order-success/{id_cart}', 'prosesCheckout')->middleware('auth')->name('order.success');
-    Route::post('order/{id_place}', 'orderNow')->middleware('auth')->can('pengunjung')->name('order');
+    Route::get('order/{id_place}', 'orderNow')->middleware('auth')->can('pengunjung')->name('order');
 });
 
 // PENEGUNJUNG / Controller Kelola Checkout

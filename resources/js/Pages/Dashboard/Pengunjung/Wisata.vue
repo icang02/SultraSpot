@@ -7,21 +7,7 @@
         Wisata
       </h4>
 
-      <div
-        v-if="$page.props.flash.success"
-        class="alert alert-success alert-dismissible"
-        role="alert"
-      >
-        {{ $page.props.flash.success }}
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-
-      <div class="row mb-4 px-md-4 px-1">
+      <div class="row mb-4 px-md-4 px-1 justify-content-center">
         <div class="col-md-6 mb-2" v-for="wisata in allWisata" :key="wisata.id">
           <Link
             :href="`list-wisata/${wisata.id}`"
