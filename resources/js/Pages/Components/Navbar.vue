@@ -9,7 +9,7 @@
     "
     id="layout-navbar"
   >
-    <div
+    <!-- <div
       class="
         layout-menu-toggle
         navbar-nav
@@ -21,7 +21,7 @@
       <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
         <i class="bx bx-menu bx-sm"></i>
       </a>
-    </div>
+    </div> -->
 
     <div
       class="navbar-nav-right d-flex align-items-center"
@@ -42,10 +42,14 @@
       <!-- /Search -->
 
       <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <!-- Ul Keranjang -->
         <li class="nav-item lh-1 me-3" v-if="data_global[2] == 'pengunjung'">
-          <Link :href="route('carts')">
-            My Cart
-            <span class="badge badge-center rounded-pill bg-success ms-1">
+          <Link
+            :href="route('carts')"
+            class="github-button d-flex align-items-center"
+          >
+            Carts
+            <span class="badge badge-center rounded-pill bg-success ms-2">
               {{ data_global[0] }}
             </span>
           </Link>
@@ -83,7 +87,9 @@
                     <span class="fw-semibold d-block">
                       {{ data_global[1] }}
                     </span>
-                    <small class="text-muted"> {{ data_global[2] }} </small>
+                    <small class="text-muted">
+                      {{ titleCase(data_global[2]) }}
+                    </small>
                   </div>
                 </div>
               </Link>
@@ -134,6 +140,16 @@ export default {
   setup() {
     const data_global = computed(() => usePage().props.value.data_global);
     return { data_global };
+  },
+
+  methods: {
+    titleCase(phrase) {
+      return phrase
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    },
   },
 
   components: {

@@ -1,0 +1,27 @@
+#nav-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #pembungkus-nav {
+    padding-bottom: 65px;
+  }
+
+  #nav-mobile {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    font-weight: bolder;
+    display: block;
+  }
+
+  #nav-mobile .container-fluid {
+    background: #fff;
+  }
+
+  #nav-mobile .container-fluid .navbar-brand {
+    color: #9294FF !important;
+  }
+
+}

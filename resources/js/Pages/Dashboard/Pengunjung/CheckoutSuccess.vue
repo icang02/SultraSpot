@@ -1,4 +1,5 @@
 <template>
+  <Head title="SultraSpot | Checkout Success" />
   <Layout>
     <div class="container-xxl flex-grow-1 container-p-y text-center mt-3">
       <div class="misc-wrapper">
@@ -26,13 +27,14 @@
 
 <script>
 import Layout from "../Shared/Template.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import illustrations from "../../../../img/illustrations/girl-doing-yoga-light.png";
 
 export default {
   components: {
     Layout,
     Link,
+    Head,
   },
 
   data() {

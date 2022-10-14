@@ -1,4 +1,6 @@
 <template>
+  <Head title="SultraSpot | Keranjang" />
+
   <Layout>
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4">
@@ -172,7 +174,7 @@
 
 <script>
 import Layout from "../Shared/Template.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { useToast } from "vue-toastification";
 import { Inertia } from "@inertiajs/inertia";
@@ -180,6 +182,7 @@ import { Inertia } from "@inertiajs/inertia";
 export default {
   components: {
     Layout,
+    Head,
     Link,
   },
 

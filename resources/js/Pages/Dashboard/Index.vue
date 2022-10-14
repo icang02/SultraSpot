@@ -1,4 +1,6 @@
 <template>
+  <Head title="SultraSpot | Dashboard" />
+
   <Layout>
     <div class="container-xxl flex-grow-1 container-p-y">
       <div class="row">
@@ -777,7 +779,7 @@
 
 <script>
 import Layout from "../Dashboard/Shared/Template.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
 
@@ -790,6 +792,7 @@ export default {
   components: {
     Layout,
     Link,
+    Head,
   },
 };
 </script>

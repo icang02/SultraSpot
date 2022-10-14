@@ -1,4 +1,5 @@
 <template>
+  <Head title="SultraSpot | Detail Wisata" />
   <Layout>
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4">
@@ -6,8 +7,8 @@
         Wisata
       </h4>
 
-      <div class="row px-4">
-        <div class="col-md-7">
+      <div class="row px-md-4 px-0">
+        <div class="col-md-7 mb-md-0 mb-4">
           <div class="card">
             <h5 class="card-header">{{ wisata.name }}</h5>
             <div class="card-body">
@@ -146,7 +147,7 @@
 
 <script>
 import Layout from "../Shared/Template.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { useToast } from "vue-toastification";
 import { Inertia } from "@inertiajs/inertia";
@@ -167,6 +168,7 @@ export default {
   components: {
     Layout,
     Link,
+    Head,
   },
 
   props: {

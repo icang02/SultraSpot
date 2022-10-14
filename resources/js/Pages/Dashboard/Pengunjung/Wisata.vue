@@ -1,4 +1,5 @@
 <template>
+  <Head title="SultraSpot | Wisata" />
   <Layout>
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4">
@@ -20,7 +21,7 @@
         ></button>
       </div>
 
-      <div class="row mb-4 px-4">
+      <div class="row mb-4 px-md-4 px-0">
         <div class="col-md-6 mb-2" v-for="wisata in allWisata" :key="wisata.id">
           <Link
             :href="`list-wisata/${wisata.id}`"
@@ -57,12 +58,13 @@
 
 <script>
 import Layout from "../Shared/Template.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 
 export default {
   components: {
     Layout,
     Link,
+    Head,
   },
 
   data() {
