@@ -1,0 +1,78 @@
+<template>
+  <Layout>
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light">Wisata & Event /</span>
+        Wisata
+      </h4>
+
+      <div
+        v-if="$page.props.flash.success"
+        class="alert alert-success alert-dismissible"
+        role="alert"
+      >
+        {{ $page.props.flash.success }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="row mb-4 px-4">
+        <div class="col-md-6 mb-2" v-for="wisata in allWisata" :key="wisata.id">
+          <Link
+            :href="`list-wisata/${wisata.id}`"
+            class="card mb-3 cursor-pointer shadow"
+          >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  class="card-img card-img-left"
+                  :src="`${base}/assets/img/elements/12.jpg`"
+                  alt="Card image"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ wisata.name }}</h5>
+                  <p class="card-text">
+                    <i class="bx bxs-map me-1"></i> {{ wisata.address }}
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted"> {{ wisata.city }} </small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      <hr class="my-5" />
+    </div>
+  </Layout>
+</template>
+
+<script>
+import Layout from "../Shared/Template.vue";
+import { Link } from "@inertiajs/inertia-vue3";
+
+export default {
+  components: {
+    Layout,
+    Link,
+  },
+
+  data() {
+    return {
+      base: window.location.origin,
+    };
+  },
+
+  props: {
+    allWisata: Object,
+  },
+};
+</script>
