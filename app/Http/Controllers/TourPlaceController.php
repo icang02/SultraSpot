@@ -9,20 +9,15 @@ use Inertia\Inertia;
 
 class TourPlaceController extends Controller
 {
-    public function index()
-    {
-        $this->authorize('admin');
-
-        return view('dashboard.admin.wisata.index', [
-            'title' => 'Wisata',
-            'wisata_' => TourPlace::all(),
-        ]);
-    }
-
-
     public function listWisata()
     {
-        return Inertia::render('Dashboard/Pengunjung/Wisata', [
+        if (auth()->user()->role_id == 1) {
+            $toRender = 'Dashboard/Admin/Wisata';
+        } else if (auth()->user()->role_id == 2) {
+            $toRender = 'Dashboard/Pengunjung/Wisata';
+        }
+
+        return Inertia::render($toRender, [
             'title' => 'Wisata',
             'allWisata' => TourPlace::all(),
         ]);

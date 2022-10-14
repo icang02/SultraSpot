@@ -38,7 +38,7 @@ Route::controller(AuthenticateController::class)->group(function () {
 
 // ADMIN - PENGUNJUNG / Controller Wisata
 // # Admin
-Route::get('wisata', [TourPlaceController::class, 'index'])->middleware('auth');
+// Route::get('wisata', [TourPlaceController::class, 'index'])->middleware('auth')->name('wisata');
 // # Pengunung
 Route::get('list-wisata', [TourPlaceController::class, 'listWisata'])->middleware('auth')->name('list-wisata');
 Route::get('list-wisata/{id}', [TourPlaceController::class, 'detailWisata'])->middleware('auth')->name('wisata.detail');

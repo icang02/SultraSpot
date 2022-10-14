@@ -316,8 +316,11 @@
         <span class="menu-header-text">Wisata &amp; Event</span>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
-        <Link :href="route('dashboard')" class="menu-link">
+      <li
+        class="menu-item"
+        :class="{ active: $page.url.startsWith('/list-wisata') }"
+      >
+        <Link :href="route('list-wisata')" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Wisata</div>
         </Link>

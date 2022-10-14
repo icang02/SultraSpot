@@ -8,7 +8,7 @@
         Checkout
       </h4>
 
-      <div class="row px-4">
+      <div class="row px-md-4 px-1">
         <div class="col-md-12">
           <div class="card">
             <h6 class="card-header text-light">
@@ -92,7 +92,7 @@
         </div>
       </div>
 
-      <div class="row px-4 mt-4 justify-content-end">
+      <div class="row px-md-4 px-1 mt-4 justify-content-end">
         <div class="col-md-4">
           <div class="card">
             <div class="card-body text-center">

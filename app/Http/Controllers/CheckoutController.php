@@ -34,6 +34,7 @@ class CheckoutController extends Controller
             'user_id' => auth()->user()->id,
             'tour_place_id' => $cart->tour_place_id,
             'quantity' => $cart->quantity,
+            'status' => 'pending',
             'total_payment' => $cart->total_payment,
         ]);
 

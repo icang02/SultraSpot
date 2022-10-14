@@ -26519,6 +26519,7 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
     background-color: #FFFFFF;
     font-weight: bolder;
     display: block;
+    padding: 8px 10px;
   }
 
   #nav-mobile .container-fluid {

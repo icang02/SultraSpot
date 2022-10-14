@@ -21,7 +21,7 @@
         ></button>
       </div>
 
-      <div class="row mb-4 px-md-4 px-0">
+      <div class="row mb-4 px-md-4 px-1">
         <div class="col-md-6 mb-2" v-for="wisata in allWisata" :key="wisata.id">
           <Link
             :href="`list-wisata/${wisata.id}`"
