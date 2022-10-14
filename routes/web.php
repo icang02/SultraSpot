@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Home dan Dashboard Index
-Route::get('/', fn () => view('home.index'))->name('home');
+Route::get('/', fn () => Inertia::render('Home/Index'))->name('home');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index', ['title' => 'SultraSpot']);
 })->middleware('auth')->name('dashboard');
+
 
 // ADMIN / Manage User
 Route::controller(ManageUserController::class)->group(function () {
@@ -28,7 +29,7 @@ Route::controller(ManageUserController::class)->group(function () {
 Route::controller(AuthenticateController::class)->group(function () {
     Route::get('/login', 'login')->name('login')->middleware('guest');
     Route::post('/login', 'authenticate');
-    Route::post('/logout', 'logout');
+    Route::post('/logout', 'logout')->name('logout');
     Route::get('/forget-password', 'forgetPassword');
     Route::get('/register', 'register')->middleware('guest')->name('register');
     Route::post('/register', 'registerStore');

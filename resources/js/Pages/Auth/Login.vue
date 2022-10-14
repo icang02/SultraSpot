@@ -1,4 +1,6 @@
 <template>
+  <Head title="SultraSpot | Login" />
+
   <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
@@ -7,7 +9,7 @@
           <div class="card-body">
             <!-- Logo -->
             <div class="app-brand justify-content-center">
-              <a :href="route('home')" class="app-brand-link gap-2">
+              <Link :href="route('home')" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <svg
                     width="25"
@@ -93,7 +95,7 @@
                 <span class="app-brand-text demo text-body fw-bolder"
                   >SultraSpot</span
                 >
-              </a>
+              </Link>
             </div>
             <!-- /Logo -->
 
@@ -210,13 +212,14 @@
 </template>
 
 <script>
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import { reactive } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
   components: {
     Link,
+    Head,
   },
 
   props: {
