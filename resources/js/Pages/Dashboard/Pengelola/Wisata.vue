@@ -67,37 +67,37 @@
               </div>
               <hr class="my-3" />
               <div class="row mb-3">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-map"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">ALAMAT</div>
                   {{ allWisata.address }}
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-phone"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">TELEPON</div>
                   {{ allWisata.telp }}
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-purchase-tag-alt"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">HARGA TIKET</div>
                   {{ allWisata.price }}
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-plane-take-off"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">STOK</div>
                   <span v-if="allWisata.ticket_stock > 0">
                     {{ allWisata.ticket_stock }}

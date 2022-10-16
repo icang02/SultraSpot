@@ -95,39 +95,41 @@
                   ><i class="bx bx-paper-plane me-1"></i> Open Direction</a
                 >
               </div>
+
               <hr class="my-3" />
+
               <div class="row mb-3">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-map"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">ALAMAT</div>
                   {{ wisata.address }}
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-phone"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">TELEPON</div>
                   {{ wisata.telp }}
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-purchase-tag-alt"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">HARGA TIKET</div>
                   {{ wisata.price }}
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-1 col-1">
                   <i class="bx bxs-plane-take-off"></i>
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-11">
                   <div class="fw-bold">STOK</div>
                   <span v-if="wisata.ticket_stock > 0">
                     {{ wisata.ticket_stock }}

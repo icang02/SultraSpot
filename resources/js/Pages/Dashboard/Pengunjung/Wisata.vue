@@ -7,7 +7,10 @@
         Wisata
       </h4>
 
-      <div class="row mb-4 px-md-4 px-1 justify-content-center">
+      <div
+        class="row mb-4 px-md-4 px-1 justify-content-center"
+        v-if="allWisata.length != 0"
+      >
         <div class="col-md-6 mb-2" v-for="wisata in allWisata" :key="wisata.id">
           <Link
             :href="`list-wisata/${wisata.id}`"
@@ -35,6 +38,10 @@
             </div>
           </Link>
         </div>
+      </div>
+
+      <div v-else>
+        <h4 class="text-light text-center">Belum ada transaksi</h4>
       </div>
 
       <hr class="my-5" />
