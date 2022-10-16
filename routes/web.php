@@ -66,4 +66,7 @@ Route::controller(CheckoutController::class)->group(function () {
 Route::controller(UserOrderController::class)->group(function () {
     Route::get('pesanan', 'index')->middleware('auth')->name('pesanan');
     Route::get('pesanan/{id}', 'show')->middleware('auth')->can('pengunjung')->name('pesanan.show');
+    Route::post('order-confirmation/{id}', 'orderConfirm');
+    Route::get('riwayat', 'index')->middleware('auth')->name('riwayat');
+    Route::delete('order-delete/{id}', 'delete');
 });

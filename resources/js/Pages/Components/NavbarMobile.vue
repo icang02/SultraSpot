@@ -32,15 +32,22 @@
           </div>
 
           <!-- PENGUNJUNG MENU -->
-          <div v-if="data_global[2] == 'pengunjung'">
+          <div
+            v-if="
+              data_global[2] == 'pengunjung' || data_global[2] == 'pengelola'
+            "
+          >
             <Link
               class="nav-item nav-link"
               :class="{ active: $page.url.startsWith('/list-wisata') }"
               :href="route('list-wisata')"
-              >Wisata
+            >
+              <span v-if="data_global[2] == 'pengelola'">My Wisata</span>
+              <span v-else>Wisata</span>
             </Link>
-            <Link class="nav-item nav-link" :href="route('dashboard')"
-              >Event
+            <Link class="nav-item nav-link" :href="route('dashboard')">
+              <span v-if="data_global[2] == 'pengelola'">My Event</span>
+              <span v-else>Event</span>
             </Link>
           </div>
 
@@ -66,27 +73,24 @@
             <Link class="nav-item nav-link" :href="route('dashboard')"
               >Daftar Pesanan
             </Link>
-            <Link class="nav-item nav-link" :href="route('dashboard')"
-              >Riwayat
-            </Link>
           </div>
 
           <!-- PENGUNJUNG MENU -->
-          <div v-if="data_global[2] == 'pengunjung'">
-            <Link
-              class="nav-item nav-link"
-              :class="{ active: $page.url.startsWith('/carts') }"
-              :href="route('carts')"
-              >Keranjang
-            </Link>
-            <Link
-              class="nav-item nav-link"
-              :class="{ active: $page.url.startsWith('/pesanan') }"
-              :href="route('pesanan')"
-              >Pesanan
-            </Link>
-            <Link class="nav-item nav-link" href="#">Riwayat</Link>
-          </div>
+          <Link
+            v-if="data_global[2] == 'pengunjung'"
+            class="nav-item nav-link"
+            :class="{ active: $page.url.startsWith('/carts') }"
+            :href="route('carts')"
+            >Keranjang
+          </Link>
+
+          <Link
+            v-if="data_global[2] == 'pengelola'"
+            class="nav-item nav-link"
+            :class="{ active: $page.url.startsWith('/pesanan') }"
+            :href="route('pesanan')"
+            >Pesanan
+          </Link>
           <hr />
         </div>
       </div>

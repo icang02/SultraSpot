@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Inertia\Inertia;
 
+use function GuzzleHttp\Promise\all;
+
 class UserOrderController extends Controller
 {
     public function index()
@@ -37,5 +39,26 @@ class UserOrderController extends Controller
             'title' => 'Pesanan',
             'user_order' => $orders,
         ]);
+    }
+
+    public function orderConfirm($id)
+    {
+        // dd(request()->all());
+        if (request()->status == 'selesai') $status = 'selesai';
+        else if (request()->status == 'gagal') $status = 'gagal';
+
+        $order = UserOrder::find($id);
+        $order->update([
+            'status' => $status,
+        ]);
+
+        return redirect()->route('pesanan');
+    }
+
+    public function delete($id)
+    {
+        // dd($id);
+        UserOrder::destroy($id);
+        // return redirect()->route('pesanan');
     }
 }

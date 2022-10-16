@@ -33,7 +33,7 @@
                   <span
                     class="badge bg-label-warning me-1"
                     v-if="order.status == 'pending'"
-                    >Pending</span
+                    >Proses</span
                   >
                   <span
                     class="badge bg-label-success me-1"
@@ -47,10 +47,46 @@
                   >
                 </td>
                 <td>
-                  <button class="btn btn-sm btn-primary">Lihat</button>
                   <button
-                    v-if="order.status == 'selesai' || order.status == 'gagal'"
-                    class="btn btn-sm btn-danger ms-1"
+                    @click="OrderConfirm(order.id)"
+                    class="btn btn-sm btn-success me-1"
+                    v-if="
+                      data_global[2] == 'pengelola' && order.status == 'pending'
+                    "
+                  >
+                    Konfirmasi
+                  </button>
+                  <button
+                    @click="OrderConfirmCancel(order.id)"
+                    class="btn btn-sm btn-warning me-1"
+                    v-if="
+                      data_global[2] == 'pengelola' && order.status == 'pending'
+                    "
+                  >
+                    Batalkan
+                  </button>
+                  <button
+                    class="btn btn-sm btn-primary me-1"
+                    v-if="data_global[2] == 'pengelola'"
+                  >
+                    Lihat Bukti Transfer
+                  </button>
+
+                  <button
+                    v-if="data_global[2] == 'pengunjung'"
+                    class="btn btn-sm btn-primary me-1"
+                  >
+                    Lihat
+                  </button>
+
+                  <button
+                    @click="orderDelete(order.id)"
+                    class="btn btn-sm btn-danger"
+                    v-if="
+                      (data_global[2] == 'pengelola' ||
+                        data_global[2] == 'pengunjung') &&
+                      (order.status == 'selesai' || order.status == 'gagal')
+                    "
                   >
                     Hapus
                   </button>
@@ -71,10 +107,67 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { usePage } from "@inertiajs/inertia-vue3";
 import Layout from "../Shared/Template.vue";
 import { Link, Head } from "@inertiajs/inertia-vue3";
+import { Inertia } from "@inertiajs/inertia";
+import { useToast } from "vue-toastification";
 
 export default {
+  setup() {
+    const data_global = computed(() => usePage().props.value.data_global);
+    return { data_global };
+  },
+
+  methods: {
+    OrderConfirm(id_order) {
+      console.log("id order : " + id_order);
+      const data = {
+        status: "selesai",
+      };
+
+      Inertia.post(`order-confirmation/${id_order}`, data, {
+        preserveScroll: true,
+        onSuccess: () =>
+          this.toast("success", "Pesanan berhasil dikonfirmasi."),
+      });
+    },
+
+    OrderConfirmCancel(id_order) {
+      console.log("id order : " + id_order);
+      const data = {
+        status: "gagal",
+      };
+
+      Inertia.post(`order-confirmation/${id_order}`, data, {
+        preserveScroll: true,
+        onSuccess: () => this.toast("error", "Pesanan dibatalkan."),
+      });
+    },
+
+    orderDelete(id_order) {
+      console.log(id_order);
+
+      Inertia.delete(`order-delete/${id_order}`, {
+        preserveScroll: true,
+        onSuccess: () => this.toast("error", "Pesanan dihapus."),
+      });
+    },
+
+    toast(color, msg) {
+      const toast = useToast();
+
+      if (color == "success") {
+        toast.success(msg);
+      } else if (color == "error") {
+        toast.error(msg);
+      } else if (color == "info") {
+        toast.info(msg);
+      }
+    },
+  },
+
   components: {
     Layout,
     Link,

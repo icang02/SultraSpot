@@ -157,7 +157,7 @@
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">
             <span v-if="data_global[2] == 'pengelola'">My Wisata</span>
-            <span v-else>My Wisata</span>
+            <span v-else>Wisata</span>
           </div>
         </Link>
       </li>
@@ -207,15 +207,12 @@
           <div data-i18n="Tables">Pesanan</div>
         </Link>
       </li>
-      <li v-if="data_global[2] == 'pengunjung'" class="menu-item">
-        <a href="tables-basic.html" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-table"></i>
-          <div data-i18n="Tables">Riwayat</div>
-        </a>
-      </li>
 
       <!-- SIDEBAR PENGELOLA -->
-      <li class="menu-header small text-uppercase">
+      <li
+        class="menu-header small text-uppercase"
+        v-if="data_global[2] == 'pengelola'"
+      >
         <span class="menu-header-text">Transaksi</span>
       </li>
       <li
@@ -227,12 +224,6 @@
           <i class="menu-icon tf-icons bx bx-detail"></i>
           <div data-i18n="Tables">Pesanan</div>
         </Link>
-      </li>
-      <li v-if="data_global[2] == 'pengelola'" class="menu-item">
-        <a href="tables-basic.html" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-table"></i>
-          <div data-i18n="Tables">Riwayat</div>
-        </a>
       </li>
 
       <li class="menu-header small text-uppercase">
