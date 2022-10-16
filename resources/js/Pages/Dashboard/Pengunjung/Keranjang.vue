@@ -85,7 +85,9 @@
         </div>
       </div>
 
-      <h4 v-else class="text-light text-center">Keranjang masih kosong</h4>
+      <div v-else>
+        <h4 class="text-light text-center">Keranjang masih kosong</h4>
+      </div>
 
       <hr class="my-5" />
     </div>

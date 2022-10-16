@@ -19,6 +19,7 @@ class TourPlaceFactory extends Factory
     {
         $price = [10000, 15000, 25000, 45000];
         return [
+            'user_id' => '1',
             'name' => fake()->sentence(2),
             'city' => fake()->city(),
             'address' => fake()->address(),

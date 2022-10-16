@@ -45,14 +45,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Icang',
-            'username' => Str::slug('Icang'),
-            'email' => 'icang@gmail.com',
+            'name' => 'Imam Saputra',
+            'username' => Str::slug('Imam Saputra'),
+            'email' => 'imam@gmail.com',
             'password' => bcrypt('password'),
-            'role_id' => 2,
+            'role_id' => 3,
+            'tour_place_id' => 1,
         ]);
 
         User::factory(47)->create();
-        TourPlace::factory(5)->create();
+        // TourPlace::factory(5)->create();
     }
 }

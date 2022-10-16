@@ -1,5 +1,5 @@
 <template>
-  <div class="container-xxl container-p-y">
+  <div class="container-xxl container-p-y d-flex justify-content-center">
     <div class="misc-wrapper">
       <h2 class="mb-2 mx-2">Page Not Found :(</h2>
       <p class="mb-4 mx-2">

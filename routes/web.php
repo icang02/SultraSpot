@@ -42,6 +42,9 @@ Route::controller(AuthenticateController::class)->group(function () {
 // # Pengunung
 Route::get('list-wisata', [TourPlaceController::class, 'listWisata'])->middleware('auth')->name('list-wisata');
 Route::get('list-wisata/{id}', [TourPlaceController::class, 'detailWisata'])->middleware('auth')->name('wisata.detail');
+Route::get('add-wisata', [TourPlaceController::class, 'add'])->middleware('auth')->name('wisata.add');
+Route::post('add-wisata', [TourPlaceController::class, 'addStore'])->middleware('auth')->name('wisata.addStore');
+
 
 // PENGUNJUNG / Controller Keranjang
 Route::controller(CartController::class)->group(function () {
@@ -61,6 +64,6 @@ Route::controller(CheckoutController::class)->group(function () {
 
 // PENEGUNJUNG / Controller Kelola Checkout
 Route::controller(UserOrderController::class)->group(function () {
-    Route::get('pesanan', 'index')->middleware('auth')->can('pengunjung')->name('pesanan');
+    Route::get('pesanan', 'index')->middleware('auth')->name('pesanan');
     Route::get('pesanan/{id}', 'show')->middleware('auth')->can('pengunjung')->name('pesanan.show');
 });

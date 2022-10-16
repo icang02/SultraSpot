@@ -176,12 +176,14 @@ export default {
   },
 
   methods: {
-    addCart(id) {
+    addCart(id_place) {
+      console.log(id_place);
+
       this.disabled = true;
       this.loading = true;
 
-      this.form.id = id;
-      Inertia.post("/add-carts/" + id, this.form, {
+      this.form.id = id_place;
+      Inertia.post("/add-carts/" + id_place, this.form, {
         preserveScroll: true,
         onSuccess: () => (
           (this.disabled = false),
@@ -192,7 +194,7 @@ export default {
     },
 
     orderNow(id_place, qty) {
-      // console.log(qty);
+      console.log(id_place);
 
       const data = {
         qty: qty,

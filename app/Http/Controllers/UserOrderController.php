@@ -11,8 +11,16 @@ class UserOrderController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role_id == 1) {
+            $this->authorize('pengunjung');
+        } else if (auth()->user()->role_id == 2) {
+            $orders = UserOrder::with('tour_place')->where('user_id', auth()->user()->id)->get();
+        } else if (auth()->user()->role_id == 3) {
+            $orders = UserOrder::with('tour_place')->where('tour_place_id', auth()->user()->id)->get();
+        }
+
         return Inertia::render('Dashboard/Pengunjung/Pesanan', [
-            'orders' => UserOrder::with('tour_place')->where('user_id', auth()->user()->id)->get(),
+            'orders' => $orders,
         ]);
     }
 

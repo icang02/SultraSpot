@@ -46,7 +46,7 @@ class CheckoutController extends Controller
     public function orderNow(Request $request, $id_place)
     {
         // dd($request->all());
-        $place = TourPlace::find($id_place);
+        $place = TourPlace::where('id', $id_place)->get()->first();
         $data = [
             'qty' => $request->qty,
             'price_kamera' => null,

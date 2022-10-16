@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('username', 50);
             $table->string('email', 50)->unique();
             $table->foreignId('role_id');
+            $table->foreignId('tour_place_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

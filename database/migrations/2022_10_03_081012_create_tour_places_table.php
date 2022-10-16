@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tour_places', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id', false)->primary();
             $table->string('name');
             $table->string('city');
             $table->string('address');
