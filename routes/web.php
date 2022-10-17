@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ManageUserController;
+use App\Http\Controllers\TourPlaceController;
 use App\Http\Controllers\UserOrderController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,7 +36,7 @@ Route::controller(AuthenticateController::class)->group(function () {
 });
 
 // ADMIN - PENGUNJUNG / Controller Wisata
-Route::controller(CheckoutController::class)->group(function () {
+Route::controller(TourPlaceController::class)->group(function () {
     Route::get('list-wisata', 'listWisata')->middleware('auth')->name('list-wisata');
     Route::get('list-wisata/{id}', 'detailWisata')->middleware('auth')->name('wisata.detail');
     Route::get('add-wisata', 'add')->middleware('auth')->name('wisata.add');
@@ -55,7 +56,8 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(CheckoutController::class)->group(function () {
     Route::get('checkout/{id_cart}', 'index')->middleware('auth')->can('pengunjung')->name('checkout');
     Route::get('order-success/{id_cart}', 'prosesCheckout')->middleware('auth')->name('order.success');
-    Route::get('order/{id_place}', 'orderNow')->middleware('auth')->can('pengunjung')->name('order');
+    Route::get('order/{id_place}', 'orderNowShow')->middleware('auth')->can('pengunjung')->name('order');
+    Route::post('order', 'orderNowStore');
 });
 
 // PENEGUNJUNG / Controller Kelola Checkout

@@ -43,7 +43,8 @@ class HandleInertiaRequests extends Middleware
                 Cart::where('user_id', auth()->user()->id)->count(),
                 auth()->user()->name,
                 auth()->user()->role->name,
-                Role::all()
+                Role::all(),
+                auth()->user()->id,
             ];
         }
 

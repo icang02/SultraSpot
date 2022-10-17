@@ -67,16 +67,22 @@
                   </button>
                   <button
                     class="btn btn-sm btn-primary me-1"
-                    v-if="data_global[2] == 'pengelola'"
+                    v-if="
+                      data_global[2] == 'pengelola' ||
+                      data_global[2] == 'pengunjung'
+                    "
                   >
                     Lihat Bukti Transfer
                   </button>
 
                   <button
-                    v-if="data_global[2] == 'pengunjung'"
+                    v-if="
+                      data_global[2] == 'pengunjung' &&
+                      order.status == 'pending'
+                    "
                     class="btn btn-sm btn-primary me-1"
                   >
-                    Lihat
+                    Upload Bukti Transfer
                   </button>
 
                   <button

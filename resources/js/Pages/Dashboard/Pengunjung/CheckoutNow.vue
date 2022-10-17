@@ -96,7 +96,10 @@
               </div>
               <br />
               <div>
-                <button class="btn btn-lg btn-success fw-bold fs-5">
+                <button
+                  @click="orderNowStore()"
+                  class="btn btn-lg btn-success fw-bold fs-5"
+                >
                   CHECKOUT
                 </button>
               </div>
@@ -112,8 +115,10 @@
 
 <script>
 import Layout from "../Shared/Template.vue";
-import { Link, Head } from "@inertiajs/inertia-vue3";
+import { Link, Head, useForm } from "@inertiajs/inertia-vue3";
 import ItemThumbnail from "../../../../img/elements/2.jpg";
+import Swal from "sweetalert2";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
   components: {
@@ -125,7 +130,36 @@ export default {
   data() {
     return {
       item_thumbnail: ItemThumbnail,
+      base: window.location.origin,
+      form: useForm({
+        tour_place_id: this.place.id,
+        quantity: parseInt(this.data.qty),
+        total_payment: this.place.price * this.data.qty,
+        rental: null,
+      }),
     };
+  },
+
+  methods: {
+    orderNowStore() {
+      Swal.fire({
+        title: "Konfirmasi?",
+        text: "Cek kembali item Anda sebelum checkout.",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonText: "Kembali",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Lanjut",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Inertia.post(`${this.base}/order`, this.form, {
+            onSuccess: () =>
+              Swal.fire("Sukses!", `Checkout berhasil.`, "success"),
+          });
+        }
+      });
+    },
   },
 
   props: {

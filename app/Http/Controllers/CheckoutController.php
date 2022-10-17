@@ -43,9 +43,8 @@ class CheckoutController extends Controller
         return Inertia::render('Dashboard/Pengunjung/CheckoutSuccess');
     }
 
-    public function orderNow(Request $request, $id_place)
+    public function orderNowShow(Request $request, $id_place)
     {
-        // dd($request->all());
         $place = TourPlace::where('id', $id_place)->get()->first();
         $data = [
             'qty' => $request->qty,
@@ -68,5 +67,27 @@ class CheckoutController extends Controller
             'place' => $place,
             'data' => $data,
         ]);
+    }
+
+    public function orderNowStore(Request $request)
+    {
+        // dd($request->all());
+
+        if (UserOrder::all()->count() == 0) {
+            $no_order = 1;
+        } else {
+            $no_order = UserOrder::select("id")->orderBy("id", "DESC")->get()->first()->id + 1;
+        }
+
+        UserOrder::create([
+            'no_order' => 'SP' . sprintf("%07d", $no_order),
+            'user_id' => auth()->user()->id,
+            'tour_place_id' => $request->tour_place_id,
+            'quantity' => $request->quantity,
+            'status' => 'pending',
+            'total_payment' => $request->total_payment,
+        ]);
+
+        return Inertia::render('Dashboard/Pengunjung/CheckoutSuccess');
     }
 }
