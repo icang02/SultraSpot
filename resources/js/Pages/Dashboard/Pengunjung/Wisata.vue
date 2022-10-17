@@ -20,15 +20,16 @@
               <div class="col-md-4">
                 <img
                   class="card-img card-img-left"
-                  :src="`${base}/assets/img/elements/12.jpg`"
+                  :src="`${base}/assets/img/wisata/thumb/${wisata.image}`"
                   alt="Card image"
+                  width="1000"
                 />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{ wisata.name }}</h5>
                   <p class="card-text">
-                    <i class="bx bxs-map me-1"></i> {{ wisata.address }}
+                    <i class="bx bxs-map"></i> {{ wisata.address }}
                   </p>
                   <p class="card-text">
                     <small class="text-muted"> {{ wisata.city }} </small>

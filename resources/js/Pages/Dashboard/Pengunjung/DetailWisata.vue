@@ -13,12 +13,12 @@
             <h5 class="card-header">{{ wisata.name }}</h5>
             <div class="card-body">
               <h6 class="text-light">
-                <i class="bx bx-map me-2"></i> {{ wisata.address }}
+                <i class="bx bx-map me-1"></i> {{ wisata.address }}
               </h6>
               <hr class="my-3" />
               <img
                 class="img-fluid"
-                src="https://source.unsplash.com/900x500?nature"
+                :src="`${base}/assets/img/wisata/${wisata.image}`"
                 alt="Image"
               />
               <div class="mt-3">
@@ -84,14 +84,11 @@
               <hr />
               <img
                 class="img-fluid"
-                src="https://source.unsplash.com/900x550?road-map"
+                :src="`${base}/assets/img/maps/maps.png`"
                 alt="Image"
               />
               <div class="d-grid mt-2">
-                <a
-                  href="https://maps.app.goo.gl/5EaJD4pvZyY81AfS6"
-                  target="_blank"
-                  class="btn btn-primary"
+                <a :href="wisata.maps" target="_blank" class="btn btn-primary"
                   ><i class="bx bx-paper-plane me-1"></i> Open Direction</a
                 >
               </div>
@@ -153,10 +150,12 @@ import { Link, Head } from "@inertiajs/inertia-vue3";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { useToast } from "vue-toastification";
 import { Inertia } from "@inertiajs/inertia";
+// https://source.unsplash.com/900x500?nature
 
 export default {
   data() {
     return {
+      base: window.location.origin,
       loading: false,
       disabled: false,
       form: useForm({

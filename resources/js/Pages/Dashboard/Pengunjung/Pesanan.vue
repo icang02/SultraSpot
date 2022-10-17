@@ -68,8 +68,9 @@
                   <button
                     class="btn btn-sm btn-primary me-1"
                     v-if="
-                      data_global[2] == 'pengelola' ||
-                      data_global[2] == 'pengunjung'
+                      (data_global[2] == 'pengelola' ||
+                        data_global[2] == 'pengunjung') &&
+                      order.status != 'pending'
                     "
                   >
                     Lihat Bukti Transfer

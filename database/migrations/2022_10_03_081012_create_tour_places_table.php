@@ -16,13 +16,14 @@ return new class extends Migration
         Schema::create('tour_places', function (Blueprint $table) {
             $table->integer('id', false)->primary();
             $table->string('name');
-            $table->string('city');
+            $table->string('city', 50);
             $table->string('address');
             $table->string('description');
             $table->unsignedSmallInteger('ticket_stock');
             $table->unsignedInteger('price');
             $table->string('telp');
             $table->string('image',)->default('default.jpg');
+            $table->string('maps', 75);
             $table->boolean('rental')->default(0);
         });
     }
