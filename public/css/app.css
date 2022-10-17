@@ -26503,6 +26503,10 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   }
 }
 
+.nav-home {
+  /* height: 80px; */
+}
+
 #nav-mobile {
   display: none;
 }

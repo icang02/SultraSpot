@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg fixed-top py-3 backdrop"
+    class="navbar navbar-expand-lg fixed-top py-3 backdrop nav-home"
     data-navbar-on-scroll="data-navbar-on-scroll"
   >
     <div class="container">
