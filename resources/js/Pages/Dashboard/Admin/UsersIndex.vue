@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      {{ data[0][0] }}
+      <!-- {{ data[0][0] }} -->
       <hr class="my-5" />
     </div>
   </Layout>

@@ -67,12 +67,6 @@
               :href="route('dashboard')"
               >Event
             </Link>
-
-            <hr />
-
-            <Link class="nav-item nav-link" :href="route('dashboard')"
-              >Daftar Pesanan
-            </Link>
           </div>
 
           <!-- PENGUNJUNG MENU -->
@@ -85,7 +79,9 @@
           </Link>
 
           <Link
-            v-if="data_global[2] == 'pengelola'"
+            v-if="
+              data_global[2] == 'pengelola' || data_global[2] == 'pengunjung'
+            "
             class="nav-item nav-link"
             :class="{ active: $page.url.startsWith('/pesanan') }"
             :href="route('pesanan')"
