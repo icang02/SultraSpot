@@ -52,13 +52,16 @@ class CheckoutController extends Controller
             'total_payment' => null,
         ];
 
-        if ($request->sewaKamera) {
+        if ($request->sewaKamera == true) {
             $data['price_kamera'] = 50000;
             $data['total_payment'] = ($place->price * $request->qty) + $data['price_kamera'];
+            $data['sewa_kamera'] = true;
         } else {
             $data['price_kamera'] = 0;
             $data['total_payment'] = ($place->price * $request->qty);
+            $data['sewa_kamera'] = false;
         }
+
 
         // dd($data);
 
@@ -73,6 +76,12 @@ class CheckoutController extends Controller
     {
         // dd($request->all());
 
+        if ($request->rental == true) {
+            $totalPayment = $request->total_payment + $request->price_kamera;
+        } else {
+            $totalPayment = $request->total_payment;
+        }
+
         if (UserOrder::all()->count() == 0) {
             $no_order = 1;
         } else {
@@ -85,7 +94,7 @@ class CheckoutController extends Controller
             'tour_place_id' => $request->tour_place_id,
             'quantity' => $request->quantity,
             'status' => 'pending',
-            'total_payment' => $request->total_payment,
+            'total_payment' => $totalPayment,
         ]);
 
         return Inertia::render('Dashboard/Pengunjung/CheckoutSuccess');

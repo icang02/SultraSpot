@@ -135,7 +135,8 @@ export default {
         tour_place_id: this.place.id,
         quantity: parseInt(this.data.qty),
         total_payment: this.place.price * this.data.qty,
-        rental: null,
+        rental: this.data.sewa_kamera,
+        price_kamera: this.data.price_kamera,
       }),
     };
   },
