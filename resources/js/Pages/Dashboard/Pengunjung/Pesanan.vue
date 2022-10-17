@@ -74,7 +74,7 @@
                       order.status != 'pending'
                     "
                   >
-                    Lihat
+                    Detail
                   </Link>
 
                   <Link
@@ -90,6 +90,8 @@
 
                   <button
                     v-if="order.image_tf"
+                    data-bs-toggle="modal"
+                    :data-bs-target="`#basicModal${order.id}`"
                     class="btn btn-sm btn-info me-1"
                   >
                     Bukti Transfer
@@ -119,6 +121,49 @@
 
       <hr class="my-5" />
     </div>
+
+    <!-- Modal Form Edit -->
+    <div
+      class="modal fade"
+      :id="`basicModal${order.id}`"
+      tabindex="-1"
+      aria-hidden="true"
+      v-for="order in orders"
+      :key="order.id"
+    >
+      <div class="modal-dialog modal-basic" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-2">
+              <div class="col mb-0">
+                <img
+                  :src="`img/bukti-tf/${order.image_tf}`"
+                  class="img-fluid"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Kembali
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </Layout>
 </template>
 
@@ -134,6 +179,12 @@ export default {
   setup() {
     const data_global = computed(() => usePage().props.value.data_global);
     return { data_global };
+  },
+
+  data() {
+    return {
+      base: window.location.origin,
+    };
   },
 
   methods: {

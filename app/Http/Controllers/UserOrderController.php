@@ -17,9 +17,9 @@ class UserOrderController extends Controller
         if (auth()->user()->role_id == 1) {
             $this->authorize('pengunjung');
         } else if (auth()->user()->role_id == 2) {
-            $orders = UserOrder::with('tour_place')->where('user_id', auth()->user()->id)->get();
+            $orders = UserOrder::with('tour_place')->where('user_id', auth()->user()->id)->orderBy('no_order')->get();
         } else if (auth()->user()->role_id == 3) {
-            $orders = UserOrder::with('tour_place')->where('tour_place_id', auth()->user()->id)->get();
+            $orders = UserOrder::with('tour_place')->where('tour_place_id', auth()->user()->id)->orderBy('no_order')->get();
         }
 
         return Inertia::render('Dashboard/Pengunjung/Pesanan', [

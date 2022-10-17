@@ -77,7 +77,13 @@
 
               <div v-else>
                 <h6 class="fw-bold">Bukti Transfer</h6>
-                <button class="btn btn-primary">Lihat</button>
+                <button
+                  data-bs-toggle="modal"
+                  :data-bs-target="`#basicModal${order.id}`"
+                  class="btn btn-primary"
+                >
+                  Lihat
+                </button>
               </div>
             </div>
           </div>
@@ -85,6 +91,47 @@
       </div>
 
       <hr class="my-5" />
+
+      <!-- Modal Form Edit -->
+      <div
+        class="modal fade"
+        :id="`basicModal${order.id}`"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-basic" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2"></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-2">
+                <div class="col mb-0">
+                  <img
+                    :src="`${base}/img/bukti-tf/${order.image_tf}`"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Kembali
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </Layout>
 </template>
