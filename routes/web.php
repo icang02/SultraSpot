@@ -4,18 +4,16 @@ use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ManageUserController;
-use App\Http\Controllers\TourPlaceController;
 use App\Http\Controllers\UserOrderController;
-use App\Models\Cart;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
 // Home dan Dashboard Index
 Route::get('/', fn () => Inertia::render('Home/Index'))->name('home');
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard/Index', ['title' => 'SultraSpot']);
-})->middleware('auth')->name('dashboard');
-
+Route::get('/dashboard', fn () => Inertia::render('Dashboard/Index', [
+    'title' => 'SultraSpot'
+]))->name('dashboard');
 
 // ADMIN / Manage User
 Route::controller(ManageUserController::class)->group(function () {
@@ -37,14 +35,12 @@ Route::controller(AuthenticateController::class)->group(function () {
 });
 
 // ADMIN - PENGUNJUNG / Controller Wisata
-// # Admin
-// Route::get('wisata', [TourPlaceController::class, 'index'])->middleware('auth')->name('wisata');
-// # Pengunung
-Route::get('list-wisata', [TourPlaceController::class, 'listWisata'])->middleware('auth')->name('list-wisata');
-Route::get('list-wisata/{id}', [TourPlaceController::class, 'detailWisata'])->middleware('auth')->name('wisata.detail');
-Route::get('add-wisata', [TourPlaceController::class, 'add'])->middleware('auth')->name('wisata.add');
-Route::post('add-wisata', [TourPlaceController::class, 'addStore'])->middleware('auth')->name('wisata.addStore');
-
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('list-wisata', 'listWisata')->middleware('auth')->name('list-wisata');
+    Route::get('list-wisata/{id}', 'detailWisata')->middleware('auth')->name('wisata.detail');
+    Route::get('add-wisata', 'add')->middleware('auth')->name('wisata.add');
+    Route::post('add-wisata', 'addStore')->middleware('auth')->name('wisata.addStore');
+});
 
 // PENGUNJUNG / Controller Keranjang
 Route::controller(CartController::class)->group(function () {

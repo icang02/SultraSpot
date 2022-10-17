@@ -41,7 +41,7 @@
       </div>
 
       <div v-else>
-        <h4 class="text-light text-center">Belum ada transaksi</h4>
+        <h4 class="text-light text-center">Belum ada daftar wisata</h4>
       </div>
 
       <hr class="my-5" />
