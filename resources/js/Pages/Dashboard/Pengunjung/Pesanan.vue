@@ -28,7 +28,7 @@
                   <strong>{{ order.no_order }}</strong>
                 </td>
                 <td>{{ order.tour_place.name }}</td>
-                <td>{{ order.total_payment }}</td>
+                <td>Rp {{ order.total_payment }}</td>
                 <td>
                   <span
                     class="badge bg-label-warning me-1"
@@ -65,7 +65,8 @@
                   >
                     Batalkan
                   </button>
-                  <button
+                  <Link
+                    :href="route('pesanan.show', order.id)"
                     class="btn btn-sm btn-primary me-1"
                     v-if="
                       (data_global[2] == 'pengelola' ||
@@ -73,17 +74,25 @@
                       order.status != 'pending'
                     "
                   >
-                    Lihat Bukti Transfer
-                  </button>
+                    Lihat
+                  </Link>
 
-                  <button
+                  <Link
+                    :href="route('pesanan.show', order.id)"
                     v-if="
                       data_global[2] == 'pengunjung' &&
                       order.status == 'pending'
                     "
                     class="btn btn-sm btn-primary me-1"
                   >
-                    Upload Bukti Transfer
+                    Lihat
+                  </Link>
+
+                  <button
+                    v-if="order.image_tf"
+                    class="btn btn-sm btn-info me-1"
+                  >
+                    Bukti Transfer
                   </button>
 
                   <button

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\UserOrder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 use function GuzzleHttp\Promise\all;
 
@@ -28,17 +29,30 @@ class UserOrderController extends Controller
 
     public function show($id)
     {
-        $orders = UserOrder::where('user_id', $id)->get();
-        // dd(count($orders));
 
-        Blade::directive('rupiah', function ($expression) {
-            return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
-        });
+        $order = UserOrder::with('tour_place')->find($id);
+        $date = $order->created_at->format('Y-m-d H:i:s');
 
-        return view('dashboard.pengunjung.pesanan.detail', [
-            'title' => 'Pesanan',
-            'user_order' => $orders,
+        return Inertia::render('Dashboard/Pengunjung/PesananShow', [
+            'title' => 'Detail Pesanan',
+            'order' => $order,
+            'date_order' => $date,
         ]);
+    }
+
+    public function uploadBuktiTf(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('bukti-tf');
+
+        UserOrder::find($id)->update([
+            'image_tf' => $path,
+        ]);
+
+        return redirect()->route('pesanan');
     }
 
     public function orderConfirm($id)
@@ -58,7 +72,13 @@ class UserOrderController extends Controller
     public function delete($id)
     {
         // dd($id);
-        UserOrder::destroy($id);
-        // return redirect()->route('pesanan');
+        $userOrder = UserOrder::find($id);
+        $pathName = $userOrder->image_tf;
+        // dd($pathName);
+
+        Storage::delete($pathName);
+        $userOrder->delete();
+
+        return redirect()->route('pesanan');
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('quantity');
             $table->unsignedInteger('total_payment');
             $table->enum('status', ['pending', 'selesai', 'gagal']);
+            $table->string('image_tf')->nullable();
             $table->timestamps();
         });
     }
