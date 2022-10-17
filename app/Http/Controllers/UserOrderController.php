@@ -46,10 +46,13 @@ class UserOrderController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        $path = $request->file('image')->store('bukti-tf');
+        $imgName = uniqid() . '-' . $request->image->getClientOriginalName();
+        $pathName = 'img/bukti-tf';
+        // move_uploaded_file($imgName);
+        $request->file('image')->move($pathName, $imgName);
 
         UserOrder::find($id)->update([
-            'image_tf' => $path,
+            'image_tf' => $imgName,
         ]);
 
         return redirect()->route('pesanan');
@@ -73,10 +76,10 @@ class UserOrderController extends Controller
     {
         // dd($id);
         $userOrder = UserOrder::find($id);
-        $pathName = $userOrder->image_tf;
-        // dd($pathName);
+        $imgName = $userOrder->image_tf;
 
-        Storage::delete($pathName);
+        unlink('img/bukti-tf/' . $imgName);
+
         $userOrder->delete();
 
         return redirect()->route('pesanan');
