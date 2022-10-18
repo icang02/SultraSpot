@@ -6,14 +6,14 @@
     style="position: relative"
   >
     <div class="app-brand demo">
-      <a href="" class="app-brand-link">
+      <Link :href="route('dashboard')" class="app-brand-link">
         <span class="app-brand-logo demo">
           <img width="32" src="assets/img/favicon/logo.png" alt="Logo" />
         </span>
         <span class="app-brand-text demo menu-text fw-bolder ms-2"
           >SultraSpot</span
         >
-      </a>
+      </Link>
 
       <a
         href=""
