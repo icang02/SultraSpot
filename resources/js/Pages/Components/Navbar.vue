@@ -54,6 +54,18 @@
             </span>
           </Link>
         </li>
+        <!-- Pesanan Pengelola -->
+        <li class="nav-item lh-1 me-3" v-if="data_global[2] == 'pengelola'">
+          <Link
+            :href="route('pesanan')"
+            class="github-button d-flex align-items-center"
+          >
+            Orders
+            <span class="badge badge-center rounded-pill bg-success ms-2">
+              {{ data_global[5] }}
+            </span>
+          </Link>
+        </li>
 
         <!-- User -->
         <li class="nav-item navbar-dropdown dropdown-user dropdown">

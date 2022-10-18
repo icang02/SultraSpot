@@ -9,10 +9,6 @@ class UserOrder extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $casts = [
-        'tour_place_id' => 'array',
-        'quantity' => 'array',
-    ];
 
     public function tour_place()
     {
