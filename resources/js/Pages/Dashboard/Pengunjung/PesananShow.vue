@@ -21,8 +21,8 @@
               <div class="row mt-4">
                 <div class="col-md-6 col-6">
                   <div>
-                    <h6 class="fw-bold">Nama</h6>
-                    <p>{{ data_global[1] }}</p>
+                    <h6 class="fw-bold">Nama Pemesan</h6>
+                    <p>{{ order.user.name }}</p>
                   </div>
                   <div>
                     <h6 class="fw-bold">Harga Tiket</h6>

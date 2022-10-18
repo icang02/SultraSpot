@@ -30,7 +30,7 @@ class UserOrderController extends Controller
     public function show($id)
     {
 
-        $order = UserOrder::with('tour_place')->find($id);
+        $order = UserOrder::with('tour_place', 'user')->find($id);
         $date = $order->created_at->format('Y-m-d H:i:s');
 
         return Inertia::render('Dashboard/Pengunjung/PesananShow', [

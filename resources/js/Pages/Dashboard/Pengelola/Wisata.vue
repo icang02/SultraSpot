@@ -37,7 +37,7 @@
               <hr class="my-3" />
               <img
                 class="img-fluid"
-                src="https://source.unsplash.com/900x500?nature"
+                :src="`${base}/assets/img/wisata/${allWisata.image}`"
                 alt="Image"
               />
               <div class="mt-3">
@@ -54,7 +54,7 @@
               <hr />
               <img
                 class="img-fluid"
-                src="https://source.unsplash.com/900x550?road-map"
+                :src="`${base}/assets/img/maps/maps.png`"
                 alt="Image"
               />
               <div class="d-grid mt-2">

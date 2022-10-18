@@ -47,6 +47,17 @@
                   >
                 </td>
                 <td>
+                  <Link
+                    :href="route('pesanan.show', order.id)"
+                    v-if="
+                      data_global[2] == 'pengunjung' ||
+                      data_global[2] == 'pengelola'
+                    "
+                    class="btn btn-sm btn-primary me-1"
+                  >
+                    Detail
+                  </Link>
+
                   <button
                     @click="OrderConfirm(order.id)"
                     class="btn btn-sm btn-success me-1"
@@ -65,28 +76,6 @@
                   >
                     Batalkan
                   </button>
-                  <Link
-                    :href="route('pesanan.show', order.id)"
-                    class="btn btn-sm btn-primary me-1"
-                    v-if="
-                      (data_global[2] == 'pengelola' ||
-                        data_global[2] == 'pengunjung') &&
-                      order.status != 'pending'
-                    "
-                  >
-                    Detail
-                  </Link>
-
-                  <Link
-                    :href="route('pesanan.show', order.id)"
-                    v-if="
-                      data_global[2] == 'pengunjung' &&
-                      order.status == 'pending'
-                    "
-                    class="btn btn-sm btn-primary me-1"
-                  >
-                    Lihat
-                  </Link>
 
                   <button
                     v-if="order.image_tf"
