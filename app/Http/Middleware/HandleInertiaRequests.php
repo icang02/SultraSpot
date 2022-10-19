@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Models\Cart;
+use App\Models\PengelolaOrder;
 use App\Models\Role;
-use App\Models\UserOrder;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -46,7 +46,7 @@ class HandleInertiaRequests extends Middleware
                 auth()->user()->role->name,
                 Role::all(),
                 auth()->user()->id,
-                UserOrder::where('tour_place_id', auth()->user()->tour_place_id)->count(),
+                PengelolaOrder::where('tour_place_id', auth()->user()->tour_place_id)->where('status', 'pending')->count(),
             ];
         }
 

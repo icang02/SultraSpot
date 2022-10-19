@@ -21,7 +21,96 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody class="table-border-bottom-0">
+
+            <!-- tabel body pengunjung -->
+            <tbody
+              class="table-border-bottom-0"
+              v-if="data_global[2] == 'pengunjung'"
+            >
+              <tr v-for="order in orders" :key="order.id">
+                <td>
+                  <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                  <strong>{{ order.no_order }}</strong>
+                </td>
+                <td>{{ order.tour_place.name }}</td>
+                <td>Rp {{ order.total_payment }}</td>
+                <td>
+                  <span
+                    class="badge bg-label-warning me-1"
+                    v-if="order.status == 'pending'"
+                    >Proses</span
+                  >
+                  <span
+                    class="badge bg-label-success me-1"
+                    v-if="order.status == 'selesai'"
+                    >Selesai</span
+                  >
+                  <span
+                    class="badge bg-label-danger me-1"
+                    v-if="order.status == 'gagal'"
+                    >Gagal</span
+                  >
+                </td>
+                <td>
+                  <Link
+                    :href="route('pesanan.show', order.id)"
+                    v-if="
+                      data_global[2] == 'pengunjung' ||
+                      data_global[2] == 'pengelola'
+                    "
+                    class="btn btn-sm btn-primary me-1"
+                  >
+                    Detail
+                  </Link>
+
+                  <button
+                    @click="OrderConfirm(order.id)"
+                    class="btn btn-sm btn-success me-1"
+                    v-if="
+                      data_global[2] == 'pengelola' && order.status == 'pending'
+                    "
+                  >
+                    Konfirmasi
+                  </button>
+                  <button
+                    @click="OrderConfirmCancel(order.id)"
+                    class="btn btn-sm btn-warning me-1"
+                    v-if="
+                      data_global[2] == 'pengelola' && order.status == 'pending'
+                    "
+                  >
+                    Batalkan
+                  </button>
+
+                  <button
+                    v-if="order.image_tf != 'nota.jpg'"
+                    data-bs-toggle="modal"
+                    :data-bs-target="`#basicModal${order.id}`"
+                    class="btn btn-sm btn-info me-1"
+                  >
+                    Bukti Transfer
+                  </button>
+
+                  <button
+                    @click="orderDelete(order.id)"
+                    class="btn btn-sm btn-danger"
+                    v-if="
+                      (data_global[2] == 'pengelola' ||
+                        data_global[2] == 'pengunjung') &&
+                      (order.status == 'selesai' || order.status == 'gagal')
+                    "
+                  >
+                    Hapus
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+
+            <!-- tabel body pengelola -->
+            <tbody
+              class="table-border-bottom-0"
+              v-if="data_global[2] == 'pengelola'"
+            >
               <tr v-for="order in orders" :key="order.id">
                 <td>
                   <i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -135,7 +224,13 @@
             <div class="row g-2">
               <div class="col mb-0">
                 <img
-                  :src="`img/bukti-tf/${order.image_tf}`"
+                  v-if="data_global[2] == 'pengunjung'"
+                  :src="`bukti-tf/pengunjung/${order.image_tf}`"
+                  class="img-fluid"
+                />
+                <img
+                  v-if="data_global[2] == 'pengelola'"
+                  :src="`bukti-tf/pengelola/${order.image_tf}`"
                   class="img-fluid"
                 />
               </div>
@@ -185,6 +280,7 @@ export default {
 
       Inertia.post(`order-confirmation/${id_order}`, data, {
         preserveScroll: true,
+
         onSuccess: () =>
           this.toast("success", "Pesanan berhasil dikonfirmasi."),
       });

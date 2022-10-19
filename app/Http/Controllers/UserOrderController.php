@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PengelolaOrder;
 use App\Models\UserOrder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Storage;
 
-use function GuzzleHttp\Promise\all;
 
 class UserOrderController extends Controller
 {
@@ -19,7 +17,7 @@ class UserOrderController extends Controller
         } else if (auth()->user()->role_id == 2) {
             $orders = UserOrder::with('tour_place')->where('user_id', auth()->user()->id)->orderBy('no_order')->get();
         } else if (auth()->user()->role_id == 3) {
-            $orders = UserOrder::with('tour_place')->where('tour_place_id', auth()->user()->id)->orderBy('no_order')->get();
+            $orders = PengelolaOrder::with('tour_place')->where('tour_place_id', auth()->user()->id)->orderBy('no_order')->get();
         }
 
         return Inertia::render('Dashboard/Pengunjung/Pesanan', [
@@ -29,9 +27,13 @@ class UserOrderController extends Controller
 
     public function show($id)
     {
-
-        $order = UserOrder::with('tour_place', 'user')->find($id);
-        $date = $order->created_at->format('Y-m-d H:i:s');
+        if (auth()->user()->role_id == 2) {
+            $order = UserOrder::with('tour_place', 'user')->find($id);
+            $date = $order->created_at->format('Y-m-d H:i:s');
+        } else if (auth()->user()->role_id == 3) {
+            $order = PengelolaOrder::with('tour_place', 'user')->find($id);
+            $date = $order->created_at->format('Y-m-d H:i:s');
+        }
 
         return Inertia::render('Dashboard/Pengunjung/PesananShow', [
             'title' => 'Detail Pesanan',
@@ -47,11 +49,20 @@ class UserOrderController extends Controller
         ]);
 
         $imgName = uniqid() . '-' . $request->image->getClientOriginalName();
-        $pathName = 'img/bukti-tf';
-        // move_uploaded_file($imgName);
-        $request->file('image')->move($pathName, $imgName);
+        $pathPengunjung = 'bukti-tf/pengunjung/';
+        $pathPengelola = 'bukti-tf/pengelola/';
+
+        $request->file('image')->move($pathPengunjung, $imgName);
+
+        if (!is_dir($pathPengelola)) {
+            mkdir($pathPengelola);
+        }
+        copy($pathPengunjung . $imgName, $pathPengelola . $imgName);
 
         UserOrder::find($id)->update([
+            'image_tf' => $imgName,
+        ]);
+        PengelolaOrder::find($id)->update([
             'image_tf' => $imgName,
         ]);
 
@@ -64,8 +75,13 @@ class UserOrderController extends Controller
         if (request()->status == 'selesai') $status = 'selesai';
         else if (request()->status == 'gagal') $status = 'gagal';
 
-        $order = UserOrder::find($id);
-        $order->update([
+        $userOrder = UserOrder::find($id);
+        $pengelolaOrder = PengelolaOrder::find($id);
+
+        $userOrder->update([
+            'status' => $status,
+        ]);
+        $pengelolaOrder->update([
             'status' => $status,
         ]);
 
@@ -74,13 +90,19 @@ class UserOrderController extends Controller
 
     public function delete($id)
     {
-        // dd($id);
+
         $userOrder = UserOrder::find($id);
-        $imgName = $userOrder->image_tf;
+        $pengelolaOrder = PengelolaOrder::find($id);
 
-        unlink('img/bukti-tf/' . $imgName);
-
-        $userOrder->delete();
+        if (auth()->user()->role_id == 2) {
+            $imgName = $userOrder->image_tf;
+            unlink('bukti-tf/pengunjung/' . $imgName);
+            $userOrder->delete();
+        } else if (auth()->user()->role_id == 3) {
+            $imgName = $pengelolaOrder->image_tf;
+            unlink('bukti-tf/pengelola/' . $imgName);
+            $pengelolaOrder->delete();
+        }
 
         return redirect()->route('pesanan');
     }

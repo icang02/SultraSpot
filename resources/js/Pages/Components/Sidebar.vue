@@ -8,7 +8,11 @@
     <div class="app-brand demo">
       <Link :href="route('dashboard')" class="app-brand-link">
         <span class="app-brand-logo demo">
-          <img width="32" src="assets/img/favicon/logo.png" alt="Logo" />
+          <img
+            width="32"
+            :src="`${base}/assets/img/favicon/logo.png`"
+            alt="Logo"
+          />
         </span>
         <span class="app-brand-text demo menu-text fw-bolder ms-2"
           >SultraSpot</span

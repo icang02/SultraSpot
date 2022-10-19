@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\PengelolaOrder;
 use App\Models\TourPlace;
 use App\Models\UserOrder;
 use Illuminate\Http\Request;
@@ -37,6 +38,14 @@ class CheckoutController extends Controller
             'status' => 'pending',
             'total_payment' => $cart->total_payment,
         ]);
+        PengelolaOrder::create([
+            'no_order' => 'SP' . sprintf("%07d", $no_order),
+            'user_id' => auth()->user()->id,
+            'tour_place_id' => $cart->tour_place_id,
+            'quantity' => $cart->quantity,
+            'status' => 'pending',
+            'total_payment' => $cart->total_payment,
+        ]);
 
         Cart::destroy($id_cart);
 
@@ -62,9 +71,6 @@ class CheckoutController extends Controller
             $data['sewa_kamera'] = false;
         }
 
-
-        // dd($data);
-
         return Inertia::render('Dashboard/Pengunjung/CheckoutNow', [
             'title' => 'Checkout',
             'place' => $place,
@@ -74,8 +80,6 @@ class CheckoutController extends Controller
 
     public function orderNowStore(Request $request)
     {
-        // dd($request->all());
-
         if ($request->rental == true) {
             $totalPayment = $request->total_payment + $request->price_kamera;
         } else {
@@ -89,6 +93,14 @@ class CheckoutController extends Controller
         }
 
         UserOrder::create([
+            'no_order' => 'SP' . sprintf("%07d", $no_order),
+            'user_id' => auth()->user()->id,
+            'tour_place_id' => $request->tour_place_id,
+            'quantity' => $request->quantity,
+            'status' => 'pending',
+            'total_payment' => $totalPayment,
+        ]);
+        PengelolaOrder::create([
             'no_order' => 'SP' . sprintf("%07d", $no_order),
             'user_id' => auth()->user()->id,
             'tour_place_id' => $request->tour_place_id,

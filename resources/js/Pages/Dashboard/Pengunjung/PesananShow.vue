@@ -54,7 +54,7 @@
 
               <form
                 @submit.prevent="uploadImage(order.id)"
-                v-if="!order.image_tf"
+                v-if="order.image_tf == 'nota.jpg'"
               >
                 <h6 class="fw-bold">Upload Bukti Transfer</h6>
                 <div class="input-group mt-3">
@@ -114,7 +114,13 @@
               <div class="row g-2">
                 <div class="col mb-0">
                   <img
-                    :src="`${base}/img/bukti-tf/${order.image_tf}`"
+                    v-if="data_global[2] == 'pengunjung'"
+                    :src="`${base}/bukti-tf/pengunjung/${order.image_tf}`"
+                    class="img-fluid"
+                  />
+                  <img
+                    v-if="data_global[2] == 'pengelola'"
+                    :src="`${base}/bukti-tf/pengelola/${order.image_tf}`"
                     class="img-fluid"
                   />
                 </div>
