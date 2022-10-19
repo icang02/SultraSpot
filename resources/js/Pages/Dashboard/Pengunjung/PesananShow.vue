@@ -63,7 +63,7 @@
                     class="form-control"
                     :class="{ 'is-invalid': errors.image }"
                     @input="form.image = $event.target.files[0]"
-                    accept="image/*"
+                    accept="image/jpg, image/jpeg, image/png"
                   />
                   <button class="btn btn-outline-primary" type="submit">
                     Kirim

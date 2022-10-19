@@ -6,6 +6,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\TourPlaceController;
 use App\Http\Controllers\UserOrderController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,12 +17,20 @@ Route::get('/dashboard', fn () => Inertia::render('Dashboard/Index', [
     'title' => 'SultraSpot'
 ]))->name('dashboard');
 
+Route::get('profile', function () {
+    return Inertia::render('Dashboard/Profil', [
+        'user' => User::find(auth()->user()->id),
+    ]);
+})->name('profile');
+
 // ADMIN / Manage User
 Route::controller(ManageUserController::class)->group(function () {
     Route::get('/users/{role:name}', 'index')->middleware('auth')->can('admin');
     Route::get('/users/{role}/{user:username}', 'edit')->middleware('auth')->can('admin');
     Route::patch('/users/{user:username}', 'update');
     Route::delete('/users/{user:username}', 'destroy');
+
+    Route::post('update-profile/{id}', 'updateProfile');
 });
 
 // Auth / User Authentication

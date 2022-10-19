@@ -47,6 +47,7 @@ class HandleInertiaRequests extends Middleware
                 Role::all(),
                 auth()->user()->id,
                 PengelolaOrder::where('tour_place_id', auth()->user()->tour_place_id)->where('status', 'pending')->count(),
+                auth()->user()->image_profil,
             ];
         }
 

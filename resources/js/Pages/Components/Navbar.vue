@@ -76,7 +76,7 @@
           >
             <div class="avatar avatar-online">
               <img
-                :src="`${base}/assets/img/avatars/1.png`"
+                :src="`${base}/assets/img/avatars/${data_global[6]}`"
                 alt="Avatar"
                 class="w-px-40 h-auto rounded-circle"
               />
@@ -89,7 +89,7 @@
                   <div class="flex-shrink-0 me-3">
                     <div class="avatar avatar-online">
                       <img
-                        :src="`${base}/assets/img/avatars/1.png`"
+                        :src="`${base}/assets/img/avatars/${data_global[6]}`"
                         alt="Avatar Detail"
                         class="w-px-40 h-auto rounded-circle"
                       />

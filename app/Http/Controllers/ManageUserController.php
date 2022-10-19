@@ -83,4 +83,40 @@ class ManageUserController extends Controller
         User::destroy($user->id);
         return redirect("users/$link");
     }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email:dns',
+        ];
+
+        if ($request->file('image_profil') == null) {
+            $imgName = $user->image_profil;
+        } else {
+            $rules['image_profil'] = 'image|mimes:jpg,png,jpeg|max:1024';
+        }
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('image_profil') != null) {
+            $imgType = $request->file('image_profil')->getClientOriginalExtension();
+            $imgName = uniqid() . '.' . $imgType;
+            $pathDestination = 'assets/img/avatars/';
+
+            $request->file('image_profil')->move($pathDestination, $imgName);
+            if (!$request->image_profil == 'profil.png') {
+                unlink($pathDestination . $user->image_profil);
+            }
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'image_profil' => $imgName,
+        ]);
+
+        return redirect()->route('profile');
+    }
 }
