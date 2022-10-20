@@ -182,6 +182,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // Cloudinary
+        // CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

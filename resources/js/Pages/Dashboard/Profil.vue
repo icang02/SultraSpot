@@ -12,7 +12,11 @@
           <div class="card-body">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
               <img
-                :src="`${base}/assets/img/avatars/${data_global[6]}`"
+                :src="
+                  data_global[6] != 'profil.png'
+                    ? data_global[6]
+                    : `${base}/assets/img/avatars/${data_global[6]}`
+                "
                 alt="user-avatar"
                 class="d-block rounded"
                 height="100"
@@ -51,7 +55,6 @@
           </div>
           <hr class="my-0" />
           <div class="card-body">
-            <!-- <form @submit.prevent="updateProfile(user.id)"> -->
             <div class="row">
               <div class="mb-3 col-md-6">
                 <label for="name" class="form-label">Full Name</label>
@@ -111,7 +114,6 @@
                 Cancel
               </button>
             </div>
-            <!-- </form> -->
           </div>
           <!-- /Account -->
         </div>
