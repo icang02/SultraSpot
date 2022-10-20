@@ -1,7 +1,3 @@
-.nav-home {
-  /* height: 80px; */
-}
-
 #nav-mobile {
   display: none;
 }
@@ -19,7 +15,6 @@
     font-weight: bolder;
     display: block;
     padding: 8px 10px;
-    z-index: 2;
   }
 
   #nav-mobile .container-fluid {

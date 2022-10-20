@@ -2,6 +2,7 @@
   <nav
     id="nav-mobile"
     class="navbar navbar-example navbar-expand-lg navbar-light shadow"
+    style="z-index: 99"
   >
     <div class="container-fluid">
       <Link :href="route('dashboard')" class="navbar-brand">SultraSpot</Link>
