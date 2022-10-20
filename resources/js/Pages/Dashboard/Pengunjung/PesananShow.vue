@@ -113,16 +113,7 @@
             <div class="modal-body">
               <div class="row g-2">
                 <div class="col mb-0">
-                  <img
-                    v-if="data_global[2] == 'pengunjung'"
-                    :src="`${base}/bukti-tf/pengunjung/${order.image_tf}`"
-                    class="img-fluid"
-                  />
-                  <img
-                    v-if="data_global[2] == 'pengelola'"
-                    :src="`${base}/bukti-tf/pengelola/${order.image_tf}`"
-                    class="img-fluid"
-                  />
+                  <img :src="order.image_tf" class="img-fluid" />
                 </div>
               </div>
             </div>

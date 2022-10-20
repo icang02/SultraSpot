@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('total_payment');
             $table->enum('status', ['pending', 'selesai', 'gagal']);
             $table->string('image_tf')->default('nota.jpg');
+            $table->string('image_tf_public_id')->nullable();
             $table->timestamps();
         });
     }

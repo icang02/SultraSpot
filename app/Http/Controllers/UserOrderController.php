@@ -48,23 +48,32 @@ class UserOrderController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        $imgName = uniqid() . '-' . $request->image->getClientOriginalName();
-        $pathPengunjung = 'bukti-tf/pengunjung/';
-        $pathPengelola = 'bukti-tf/pengelola/';
-
-        $request->file('image')->move($pathPengunjung, $imgName);
-
-        if (!is_dir($pathPengelola)) {
-            mkdir($pathPengelola);
-        }
-        copy($pathPengunjung . $imgName, $pathPengelola . $imgName);
-
+        $imgUrlPengunjung = cloudinary()->upload($request->file('image')->getRealPath(), [
+            'folder' => 'kwu-ganjil/bukti-tf/pengunjung'
+        ])->getSecurePath();
         UserOrder::find($id)->update([
-            'image_tf' => $imgName,
+            'image_tf' => $imgUrlPengunjung,
+            'image_tf_public_id' => cloudinary()->getPublicId($imgUrlPengunjung),
         ]);
+
+        $imgUrlPengelola = cloudinary()->upload($request->file('image')->getRealPath(), [
+            'folder' => 'kwu-ganjil/bukti-tf/pengelola'
+        ])->getSecurePath();
         PengelolaOrder::find($id)->update([
-            'image_tf' => $imgName,
+            'image_tf' => $imgUrlPengelola,
+            'image_tf_public_id' => cloudinary()->getPublicId($imgUrlPengelola),
         ]);
+
+        // $imgName = uniqid() . '-' . $request->image->getClientOriginalName();
+        // $pathPengunjung = 'bukti-tf/pengunjung/';
+        // $pathPengelola = 'bukti-tf/pengelola/';
+
+        // $request->file('image')->move($pathPengunjung, $imgName);
+
+        // if (!is_dir($pathPengelola)) {
+        //     mkdir($pathPengelola);
+        // }
+        // copy($pathPengunjung . $imgName, $pathPengelola . $imgName);
 
         return redirect()->route('pesanan');
     }
@@ -95,12 +104,14 @@ class UserOrderController extends Controller
         $pengelolaOrder = PengelolaOrder::find($id);
 
         if (auth()->user()->role_id == 2) {
-            $imgName = $userOrder->image_tf;
-            unlink('bukti-tf/pengunjung/' . $imgName);
+            // $imgName = $userOrder->image_tf;
+            // unlink('bukti-tf/pengunjung/' . $imgName);
+            cloudinary()->destroy($userOrder->image_tf_public_id);
             $userOrder->delete();
-        } else if (auth()->user()->role_id == 3) {
-            $imgName = $pengelolaOrder->image_tf;
-            unlink('bukti-tf/pengelola/' . $imgName);
+        } else {
+            // $imgName = $pengelolaOrder->image_tf;
+            // unlink('bukti-tf/pengelola/' . $imgName);
+            cloudinary()->destroy($pengelolaOrder->image_tf_public_id);
             $pengelolaOrder->delete();
         }
 

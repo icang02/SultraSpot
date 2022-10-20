@@ -86,11 +86,6 @@ class ManageUserController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
-        $imgUrl = cloudinary()->upload($request->file('image_profil')->getRealPath(), [
-            'folder' => 'kwu-ganjil/avatars'
-        ])->getSecurePath();
-        $imgPublicId = cloudinary()->getPublicId($imgUrl);
-
         $user = User::find($id);
 
         $rules = [
@@ -98,13 +93,19 @@ class ManageUserController extends Controller
             'email' => 'required|email:dns',
         ];
 
-        if ($request->file('image_profil') == null) {
-            $imgName = $user->image_profil;
-        } else {
-            $imgName = $imgUrl;
+        if ($request->file('image_profil') != null) {
             $rules['image_profil'] = 'image|mimes:jpg,png,jpeg|max:1024';
         }
         $validatedData = $request->validate($rules);
+
+        if ($request->file('image_profil') == null) {
+            $imgName = $user->image_tf;
+        } else {
+            $imgName = cloudinary()->upload($request->file('image_profil')->getRealPath(), [
+                'folder' => 'kwu-ganjil/avatars'
+            ])->getSecurePath();
+            $imgPublicId = cloudinary()->getPublicId($imgName);
+        }
 
         if ($user->image_profil != 'profil.png') {
             cloudinary()->destroy($user->image_public_id);
