@@ -101,7 +101,10 @@ class ManageUserController extends Controller
         $validatedData = $request->validate($rules);
 
         if ($request->file('image_profil') != null) {
-            $imgName = Cloudinaty::upload($request->file('file')->getRealPath())->getSecurePath();
+            $imgName = cloudinary()->upload($request->file('image_profil')->getRealPath(), [
+                'folder' => 'avatars'
+            ])->getSecurePath();
+            $imgPublicId = cloudinary()->getPublicId($imgName);
         }
 
         $user->update([

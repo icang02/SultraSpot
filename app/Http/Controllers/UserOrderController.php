@@ -64,17 +64,6 @@ class UserOrderController extends Controller
             'image_tf_public_id' => cloudinary()->getPublicId($imgUrlPengelola),
         ]);
 
-        // $imgName = uniqid() . '-' . $request->image->getClientOriginalName();
-        // $pathPengunjung = 'bukti-tf/pengunjung/';
-        // $pathPengelola = 'bukti-tf/pengelola/';
-
-        // $request->file('image')->move($pathPengunjung, $imgName);
-
-        // if (!is_dir($pathPengelola)) {
-        //     mkdir($pathPengelola);
-        // }
-        // copy($pathPengunjung . $imgName, $pathPengelola . $imgName);
-
         return redirect()->route('pesanan');
     }
 
