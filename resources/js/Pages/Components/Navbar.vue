@@ -8,6 +8,7 @@
       bg-navbar-theme
     "
     id="layout-navbar"
+    style="z-index: -1"
   >
     <!-- <div
       class="
