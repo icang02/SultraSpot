@@ -93,34 +93,16 @@ class ManageUserController extends Controller
             'email' => 'required|email:dns',
         ];
 
-        if ($request->file('image_profil') != null) {
+        if ($request->file('image_profil') == null) {
+            $imgName = $user->image_profil;
+        } else {
             $rules['image_profil'] = 'image|mimes:jpg,png,jpeg|max:1024';
         }
         $validatedData = $request->validate($rules);
 
-        if ($request->file('image_profil') == null) {
-            $imgName = $user->image_tf;
-        } else {
-            $imgName = cloudinary()->upload($request->file('image_profil')->getRealPath(), [
-                'folder' => 'kwu-ganjil/avatars'
-            ])->getSecurePath();
-            $imgPublicId = cloudinary()->getPublicId($imgName);
+        if ($request->file('image_profil') != null) {
+            $imgName = Cloudinaty::upload($request->file('file')->getRealPath())->getSecurePath();
         }
-
-        if ($user->image_profil != 'profil.png') {
-            cloudinary()->destroy($user->image_public_id);
-        }
-        // Upload Image Profil
-        // if ($request->file('image_profil') != null) {
-        //     $imgType = $request->file('image_profil')->getClientOriginalExtension();
-        //     $imgName = uniqid() . '.' . $imgType;
-        //     $pathDestination = 'assets/img/avatars/';
-
-        //     $request->file('image_profil')->move($pathDestination, $imgName);
-        //     if (!$request->image_profil == 'profil.png') {
-        //         unlink($pathDestination . $user->image_profil);
-        //     }
-        // }
 
         $user->update([
             'name' => $request->name,
@@ -128,7 +110,5 @@ class ManageUserController extends Controller
             'image_profil' => $imgName,
             'image_public_id' => $imgPublicId,
         ]);
-
-        return redirect()->route('profile');
     }
 }
