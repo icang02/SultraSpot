@@ -1,4 +1,4 @@
-<template>
+  <template>
   <Head title="SultraSpot | Pesanan" />
 
   <Layout>
@@ -167,7 +167,7 @@
                   </button>
 
                   <button
-                    v-if="order.image_tf"
+                    v-if="!order.image_tf"
                     data-bs-toggle="modal"
                     :data-bs-target="`#basicModal${order.id}`"
                     class="btn btn-sm btn-info me-1"

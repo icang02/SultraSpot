@@ -54,7 +54,9 @@
 
               <form
                 @submit.prevent="uploadImage(order.id)"
-                v-if="order.image_tf == 'nota.jpg'"
+                v-if="
+                  order.image_tf == 'nota.jpg' && data_global[2] == 'pengunjung'
+                "
               >
                 <h6 class="fw-bold">Upload Bukti Transfer</h6>
                 <div class="input-group mt-3">
@@ -75,7 +77,7 @@
                 </div>
               </form>
 
-              <div v-else>
+              <div v-if="!order.image_tf">
                 <h6 class="fw-bold">Bukti Transfer</h6>
                 <button
                   data-bs-toggle="modal"

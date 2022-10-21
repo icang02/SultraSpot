@@ -95,6 +95,7 @@ class ManageUserController extends Controller
 
         if ($request->file('image_profil') == null) {
             $imgName = $user->image_profil;
+            $imgPublicId = $user->image_public_id;
         } else {
             $rules['image_profil'] = 'image|mimes:jpg,png,jpeg|max:1024';
         }
