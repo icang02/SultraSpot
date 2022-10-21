@@ -146,7 +146,6 @@
                 type="button"
                 class="btn btn-outline-secondary"
                 data-bs-dismiss="modal"
-                @click="test()"
               >
                 Kembali
               </button>

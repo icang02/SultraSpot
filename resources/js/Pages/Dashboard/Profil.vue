@@ -18,16 +18,19 @@
                     : `${base}/assets/img/avatars/${data_global[6]}`
                 "
                 alt="user-avatar"
-                class="d-block rounded"
+                class="d-block rounded img-preview"
                 height="100"
                 width="100"
                 id="uploadedAvatar"
               />
+
               <div class="button-wrapper">
                 <label class="btn btn-primary me-2 mb-4" tabindex="0">
                   <span class="d-none d-sm-block">Upload new photo</span>
                   <i class="bx bx-upload d-block d-sm-none"></i>
                   <input
+                    id="sampul"
+                    @change="previewImage()"
                     type="file"
                     class="account-file-input"
                     :class="{ 'is-invalid': errors.image_profil }"
@@ -37,6 +40,7 @@
                   />
                 </label>
                 <button
+                  @click="resetImage()"
                   type="button"
                   class="btn btn-outline-secondary account-image-reset mb-4"
                 >
@@ -107,10 +111,25 @@
             </div>
 
             <div class="mt-2">
-              <button type="submit" class="btn btn-primary me-2">
+              <button
+                type="submit"
+                class="btn btn-primary me-2"
+                :disabled="disabled"
+              >
+                <div
+                  v-show="loading"
+                  class="spinner-border spinner-border-sm text-light me-1"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
                 Save changes
               </button>
-              <button @click="resetForm()" class="btn btn-outline-secondary">
+              <button
+                type="button"
+                @click="resetForm()"
+                class="btn btn-outline-secondary"
+              >
                 Cancel
               </button>
             </div>
@@ -147,6 +166,8 @@ export default {
   data() {
     return {
       base: window.location.origin,
+      disabled: false,
+      loading: false,
       form: useForm({
         name: this.user.name,
         username: this.user.username,
@@ -176,10 +197,37 @@ export default {
       this.form.email = this.user.email;
     },
 
+    resetImage() {
+      this.form.image_profil = this.user.image_profil;
+      const imgPreview = document.querySelector(".img-preview");
+      imgPreview.src = this.user.image_profil;
+    },
+
     updateProfile(id_user) {
-      Inertia.post(`${this.base}/update-profile/${id_user}`, this.form, {
-        onSuccess: () => Swal.fire("Sukses!", `Profil diupdate.`, "success"),
-      });
+      this.disabled = true;
+      (this.loading = true),
+        Inertia.post(`${this.base}/update-profile/${id_user}`, this.form, {
+          onSuccess: () => {
+            Swal.fire("Sukses!", `Profil diupdate.`, "success"),
+              (this.disabled = false),
+              (this.loading = false);
+          },
+          onError: () => {
+            (this.disabled = false), (this.loading = false);
+          },
+        });
+    },
+
+    previewImage() {
+      const image = document.querySelector("#sampul");
+      const imgPreview = document.querySelector(".img-preview");
+
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(image.files[0]);
+
+      oFReader.onload = function (oFREvent) {
+        imgPreview.src = oFREvent.target.result;
+      };
     },
 
     toast(color, msg) {
