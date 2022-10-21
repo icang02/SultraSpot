@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Home dan Dashboard Index
-Route::get('/', fn () => Inertia::render('Home/Index'))->name('home');
+Route::get('/', fn () => view('home'))->name('home');
 Route::get('/dashboard', fn () => Inertia::render('Dashboard/Index', [
     'title' => 'SultraSpot'
 ]))->name('dashboard');

@@ -2,8 +2,6 @@ import './MyJs/bootstrap';
 import './MyJs/config';
 import './MyJs/helpers';
 import './MyJs/menu';
-// import './MyJs/main';
-// import './MyJs/dashboards-analytics';
 import './MyJs/apexcharts';
 import './MyJs/perfect-scrollbar';
 
