@@ -14,18 +14,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
 
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('rhea/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('rhea/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('rhea/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('rhea/img/favicons/favicon.ico') }}">
-    <link rel="manifest" href="{{ asset('rhea/mg/favicons/manifest.json') }}i">
-    <meta name="msapplication-TileImage" content="{{ asset('rhea/img/favicons/mstile-150x150.png') }}">
-    <meta name="theme-color" content="#ffffff">
 
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/logo.png') }}" />
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
@@ -42,7 +32,7 @@
     <!-- ===============================================-->
     <main class="main" id="top">
       <nav class="navbar navbar-expand-lg fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-flex align-items-center fw-bold fs-2" href="#"> <img class="d-inline-block align-top img-fluid" src="{{ asset('rhea') }}/img/gallery/logo-icon.png" alt="" width="50" /><span class="text-primary fs-4 ps-2">Rhea</span></a>
+        <div class="container"><a class="navbar-brand d-flex align-items-center fw-bold fs-2" href="#"> <img class="d-inline-block align-top img-fluid" src="{{ asset('assets/img/favicon/logo.png') }}" alt="" width="50" /><span class="text-primary fs-4 ps-2">SultraSpot</span></a>
           <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
